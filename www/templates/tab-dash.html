@@ -1,0 +1,27 @@
+<ion-view view-title="Dashboard">
+  <ion-content class="fondo-inicio" id="ion-cont">
+    <div ng-hide="Ver">
+		<div class="wrapPreg" style="padding-top:2em;">Bienvenido/a QuickTrivia! El juego consiste en responder 3 preguntas con 4 opciones cada una. Antes deberas indicarnos tu nombre en el rectangulo celeste. Hazlo lo mejor que puedas y esperamos que disfrutes el juego!</div><br><br>
+    	<input type="text" id="usuario" name="usuario" ng-model="usuario.nombre" style="width:100%;background-color:lightblue;font-size:3em" required><br><br>
+    	<button class="button button-balanced boton-inicio" ng-click="Empezar()" ng-disabled="!usuario.nombre">Comenzar!!!</button>
+    </div>
+	
+    <div ng-show="Ver">
+    	<div ng-bind="preguntas" class="wrapPreg" id="wrapPreguntas" name="wrapPreguntas"></div>
+	    <br><br><br><br>
+	    <button class="button button-positive" id="uno" style="width:100%;" ng-click="Respuesta('a')" ng-bind="respuestas.uno" ng-disabled="eligio">
+	      
+	    </button><br><br>
+	    <button class="button button-positive" id="dos" style="width:100%;" ng-click="Respuesta('b')" ng-bind="respuestas.dos" ng-disabled="eligio">
+	      
+	    </button><br><br>
+	    <button class="button button-positive" id="tres" style="width:100%;" ng-click="Respuesta('c')" ng-bind="respuestas.tres" ng-disabled="eligio">
+	      
+	    </button><br><br>
+	    <button class="button button-positive" id="cuatro" style="width:100%;" ng-click="Respuesta('d')" ng-bind="respuestas.cuatro" ng-disabled="eligio">
+	      
+	    </button><br><br>
+    </div>
+    
+  </ion-content>
+</ion-view>
