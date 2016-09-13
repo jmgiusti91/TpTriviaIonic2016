@@ -7,21 +7,51 @@
     </div>
 	
     <div ng-show="Ver">
-    	<div ng-bind="preguntas" class="wrapPreg" id="wrapPreguntas" name="wrapPreguntas"></div>
+    	<div ng-bind="preguntas" class="wrapPreg" id="wrapPreguntas" name="wrapPreguntas" ng-hide="finPartida"></div>
 	    <br><br><br><br>
-	    <button class="button button-positive" id="uno" style="width:100%;" ng-click="Respuesta('a')" ng-bind="respuestas.uno" ng-disabled="eligio">
+	    <button class="button button-positive" id="uno" style="width:100%;" ng-click="Respuesta('a')" ng-bind="respuestas.uno" ng-disabled="eligio"  ng-hide="finPartida">
 	      
 	    </button><br><br>
-	    <button class="button button-positive" id="dos" style="width:100%;" ng-click="Respuesta('b')" ng-bind="respuestas.dos" ng-disabled="eligio">
+	    <button class="button button-positive" id="dos" style="width:100%;" ng-click="Respuesta('b')" ng-bind="respuestas.dos" ng-disabled="eligio"  ng-hide="finPartida">
 	      
 	    </button><br><br>
-	    <button class="button button-positive" id="tres" style="width:100%;" ng-click="Respuesta('c')" ng-bind="respuestas.tres" ng-disabled="eligio">
+	    <button class="button button-positive" id="tres" style="width:100%;" ng-click="Respuesta('c')" ng-bind="respuestas.tres" ng-disabled="eligio"  ng-hide="finPartida">
 	      
 	    </button><br><br>
-	    <button class="button button-positive" id="cuatro" style="width:100%;" ng-click="Respuesta('d')" ng-bind="respuestas.cuatro" ng-disabled="eligio">
+	    <button class="button button-positive" id="cuatro" style="width:100%;" ng-click="Respuesta('d')" ng-bind="respuestas.cuatro" ng-disabled="eligio"  ng-hide="finPartida">
 	      
 	    </button><br><br>
+
+	    <div ng-show="finPartida" style="margin-top:-200px">
+	    <div class="list card animated bounceInLeft">  
+		  <div class="item item-divider">Respuestas correctas del juego</div>
+		  <div class="item item-body">
+		    <div ng-bind="correctasJuego">
+		      
+		    </div>
+		  </div>
+		</div>  
+		<div class="list card animated bounceInRight">  
+		  <div class="item item-divider">Tu respondiste</div>
+		  <div class="item item-body">
+		    <div ng-bind="respUsuario">
+		      
+		    </div>
+		  </div>
+		</div>  
+		<div class="list card animated bounceInLeft">  
+		  <div class="item item-divider">Tu puntaje es de...</div>
+		  <div class="item item-body">
+		    <div ng-bind="usuario.puntaje">
+		      
+		    </div>
+		  </div>
+		</div>
+		<button class="button button-calm" style="width:100%;" ng-click="NuevaPartida()">Entendido.</button>
+		</div>
     </div>
+
+
     
   </ion-content>
 </ion-view>

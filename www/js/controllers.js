@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', function($scope, $timeout) {
+.controller('DashCtrl', function($scope, $timeout, $state) {
   $scope.usuario = {};
   $scope.usuario.respuestas = {};
   $scope.usuario.preguntas = {};
@@ -12,6 +12,7 @@ angular.module('starter.controllers', [])
   $scope.usuario.preguntas.tres.opcion = {};
   $scope.usuario.correctas = {};
   $scope.usuario.puntaje = 0;
+  $scope.finPartida = false;
 
   $scope.preguntas = " Cual fue el primer campeon invicto del futbol argentino?";
   $scope.Ver = false;
@@ -168,22 +169,12 @@ angular.module('starter.controllers', [])
 
       objFirebase.push({usuario:$scope.usuario})
 
-      console.log($scope.usuario);
+      $scope.finPartida = true;
 
-      $scope.Ver = false;
-      $("#ion-cont").addClass("fondo-inicio");
-      $("#ion-cont").removeClass("fondo-preg");
+      $scope.correctasJuego = $scope.usuario.correctas.uno + " - " + $scope.usuario.correctas.dos + " - " + $scope.usuario.correctas.tres;
 
+      $scope.respUsuario = $scope.usuario.respuestas.uno + " - " + $scope.usuario.respuestas.dos + " - " + $scope.usuario.respuestas.tres;
 
-      $scope.preguntas = " Cual fue el primer campeon invicto del futbol argentino?";
-      $scope.respuestas.uno = "A - San Lorenzo";
-      $scope.respuestas.dos = "B - River";
-      $scope.respuestas.tres = "C - Boca";
-      $scope.respuestas.cuatro = "D - Racing";
-      $scope.usuario.puntaje = 0;
-
-      $scope.instancia = 1;
-      
       }
     }, 3000)
     
@@ -195,6 +186,27 @@ angular.module('starter.controllers', [])
     
   }
 
+  $scope.NuevaPartida=function(){
+    $scope.finPartida = false;
+
+    $scope.Ver = false;
+      $("#ion-cont").addClass("fondo-inicio");
+      $("#ion-cont").removeClass("fondo-preg");
+
+
+      $scope.preguntas = " Cual fue el primer campeon invicto del futbol argentino?";
+      $scope.respuestas.uno = "A - San Lorenzo";
+      $scope.respuestas.dos = "B - River";
+      $scope.respuestas.tres = "C - Boca";
+      $scope.respuestas.cuatro = "D - Racing";
+      
+
+      $scope.instancia = 1;
+
+      
+      $scope.usuario.puntaje = 0;
+  }
+
   $scope.Empezar=function(){
     $scope.Ver = true;
     $("#ion-cont").removeClass("fondo-inicio");
@@ -203,7 +215,7 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('ChatsCtrl', function($scope, Chats) {
+.controller('AutorCtrl', function($scope) {
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
   // To listen for when this page is active (for example, to refresh data),
@@ -211,19 +223,6 @@ angular.module('starter.controllers', [])
   //
   //$scope.$on('$ionicView.enter', function(e) {
   //});
-
-  $scope.chats = Chats.all();
-  $scope.remove = function(chat) {
-    Chats.remove(chat);
-  };
 })
 
-.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
-  $scope.chat = Chats.get($stateParams.chatId);
-})
 
-.controller('AccountCtrl', function($scope) {
-  $scope.settings = {
-    enableFriends: true
-  };
-});
