@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', function($scope, $timeout, $state) {
+.controller('DashCtrl', function($scope, $timeout, $state, $ionicPlatform, $cordovaNativeAudio, $cordovaVibration) {
   $scope.usuario = {};
   $scope.usuario.respuestas = {};
   $scope.usuario.preguntas = {};
@@ -23,6 +23,33 @@ angular.module('starter.controllers', [])
   $scope.respuestas.cuatro = "D - Racing";
   $scope.instancia = 1;
   $scope.eligio = false;
+
+
+  try{
+
+      $cordovaNativeAudio
+      .preloadSimple('correcto', 'mp3/correcto.mp3')
+      .then(function (msg) {
+        console.log(msg);
+      }, function (error) {
+        console.log(error);
+      });
+    } catch(ex){
+      console.log(ex.message);
+    }
+
+
+    try{
+      $cordovaNativeAudio
+      .preloadSimple('incorrecto', 'mp3/incorrecto.mp3')
+      .then(function (msg) {
+        console.log(msg);
+      }, function (error) {
+        console.log(error);
+      });
+    } catch(ex){
+      console.log(ex.message);
+    }
 
   $scope.Respuesta=function(rta){
       $scope.eligio = true;
@@ -56,6 +83,40 @@ angular.module('starter.controllers', [])
       $scope.usuario.preguntas.uno.opcion.c = $scope.respuestas.tres;
       $scope.usuario.preguntas.uno.opcion.d = $scope.respuestas.cuatro;
       console.log($scope.usuario.respuestas.uno);
+
+      $ionicPlatform.ready(function() {
+        if ($scope.usuario.respuestas.uno == $scope.usuario.correctas.uno){
+
+          try{
+            $cordovaVibration.vibrate(500);
+          } catch(ex){
+            console.log(ex.message);
+          }
+
+            try{
+                $cordovaNativeAudio.play('correcto');
+            } catch(ex){
+
+              console.log(ex.message);
+            }
+
+        } else{
+
+          try{
+            $cordovaVibration.vibrate([500, 200, 500]);
+          } catch(ex){
+            console.log(ex.message);
+          }
+
+            try{
+                $cordovaNativeAudio.play('incorrecto');
+            } catch(ex){
+
+              console.log(ex.message);
+            }
+
+        }
+      });
     }
 
     if($scope.instancia == 2){
@@ -87,6 +148,40 @@ angular.module('starter.controllers', [])
       $scope.usuario.preguntas.dos.opcion.c = $scope.respuestas.tres;
       $scope.usuario.preguntas.dos.opcion.d = $scope.respuestas.cuatro;
       console.log($scope.usuario.respuestas.dos);
+
+      $ionicPlatform.ready(function() {
+        if ($scope.usuario.respuestas.dos == $scope.usuario.correctas.dos){
+
+          try{
+            $cordovaVibration.vibrate(500);
+          } catch(ex){
+            console.log(ex.message);
+          }
+
+            try{
+                $cordovaNativeAudio.play('correcto');
+            } catch(ex){
+
+              console.log(ex.message);
+            }
+
+        } else{
+
+          try{
+            $cordovaVibration.vibrate([500, 200, 500]);
+          } catch(ex){
+            console.log(ex.message);
+          }
+
+            try{
+                $cordovaNativeAudio.play('incorrecto');
+            } catch(ex){
+
+              console.log(ex.message);
+            }
+
+        }
+      });
     }
 
     if($scope.instancia == 3){
@@ -118,6 +213,40 @@ angular.module('starter.controllers', [])
       $scope.usuario.preguntas.tres.opcion.c = $scope.respuestas.tres;
       $scope.usuario.preguntas.tres.opcion.d = $scope.respuestas.cuatro;
       console.log($scope.usuario.respuestas.tres);
+
+      $ionicPlatform.ready(function() {
+        if ($scope.usuario.respuestas.tres == $scope.usuario.correctas.tres){
+
+          try{
+            $cordovaVibration.vibrate(500);
+          } catch(ex){
+            console.log(ex.message);
+          }
+
+            try{
+                $cordovaNativeAudio.play('correcto');
+            } catch(ex){
+
+              console.log(ex.message);
+            }
+
+        } else{
+
+          try{
+            $cordovaVibration.vibrate([500, 200, 500]);
+          } catch(ex){
+            console.log(ex.message);
+          }
+
+            try{
+                $cordovaNativeAudio.play('incorrecto');
+            } catch(ex){
+
+              console.log(ex.message);
+            }
+
+        }
+      });
     }
       
 
