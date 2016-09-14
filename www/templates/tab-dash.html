@@ -1,53 +1,52 @@
 <ion-view view-title="Dashboard">
   <ion-content class="fondo-inicio" id="ion-cont">
     <div ng-hide="Ver">
-		<div class="wrapPreg" style="padding-top:2em;">Bienvenido/a QuickTrivia! El juego consiste en responder 3 preguntas con 4 opciones cada una. Antes deberas indicarnos tu nombre en el rectangulo celeste. Hazlo lo mejor que puedas y esperamos que disfrutes el juego!</div><br><br>
-    	<input type="text" id="usuario" name="usuario" ng-model="usuario.nombre" style="width:100%;background-color:lightblue;font-size:3em" required><br><br>
+		<div class="wrapPreg" style="padding-top:2em;">Bienvenido/a QuickTrivia! El juego consiste en responder 3 preguntas con 4 opciones cada una.</div><br><br>
+    	<input type="text" id="usuario" name="usuario" ng-model="usuario.nombre" class="usuario-nombre" placeholder="Ingresa Nombre" required><br><br>
     	<button class="button button-balanced boton-inicio" ng-click="Empezar()" ng-disabled="!usuario.nombre">Comenzar!!!</button>
     </div>
 	
-    <div ng-show="Ver">
+    <div ng-show="Ver" style="overflow-y:auto;overflow-x:hidden;">
     	<div ng-bind="preguntas" class="wrapPreg" id="wrapPreguntas" name="wrapPreguntas" ng-hide="finPartida"></div>
-	    <br><br><br><br>
 	    <button class="button button-positive" id="uno" style="width:100%;" ng-click="Respuesta('a')" ng-bind="respuestas.uno" ng-disabled="eligio"  ng-hide="finPartida">
 	      
-	    </button><br><br>
+	    </button>
 	    <button class="button button-positive" id="dos" style="width:100%;" ng-click="Respuesta('b')" ng-bind="respuestas.dos" ng-disabled="eligio"  ng-hide="finPartida">
 	      
-	    </button><br><br>
+	    </button>
 	    <button class="button button-positive" id="tres" style="width:100%;" ng-click="Respuesta('c')" ng-bind="respuestas.tres" ng-disabled="eligio"  ng-hide="finPartida">
 	      
-	    </button><br><br>
+	    </button>
 	    <button class="button button-positive" id="cuatro" style="width:100%;" ng-click="Respuesta('d')" ng-bind="respuestas.cuatro" ng-disabled="eligio"  ng-hide="finPartida">
 	      
-	    </button><br><br>
+	    </button>
 
-	    <div ng-show="finPartida" style="margin-top:-200px">
+	    <div ng-show="finPartida" class="estadisticas">
 	    <div class="list card animated bounceInLeft">  
-		  <div class="item item-divider">Respuestas correctas del juego</div>
-		  <div class="item item-body">
-		    <div ng-bind="correctasJuego">
+		  <div class="item item-divider estadisticas-item">Respuestas correctas del juego</div>
+		  <div class="item item-body estadisticas-item">
+		    <div ng-bind="correctasJuego" class="estadisticas-item-texto">
 		      
 		    </div>
 		  </div>
 		</div>  
 		<div class="list card animated bounceInRight">  
-		  <div class="item item-divider">Tu respondiste</div>
-		  <div class="item item-body">
-		    <div ng-bind="respUsuario">
+		  <div class="item item-divider estadisticas-item">Tu respondiste</div>
+		  <div class="item item-body estadisticas-item">
+		    <div ng-bind="respUsuario" class="estadisticas-item-texto">
 		      
 		    </div>
 		  </div>
 		</div>  
 		<div class="list card animated bounceInLeft">  
-		  <div class="item item-divider">Tu puntaje es de...</div>
-		  <div class="item item-body">
-		    <div ng-bind="usuario.puntaje">
+		  <div class="item item-divider estadisticas-item">Tu puntaje es de...</div>
+		  <div class="item item-body estadisticas-item">
+		    <div ng-bind="usuario.puntaje" class="estadisticas-item-texto">
 		      
 		    </div>
 		  </div>
 		</div>
-		<button class="button button-calm" style="width:100%;" ng-click="NuevaPartida()">Entendido.</button>
+		<button class="button button-calm estadisticas-boton" ng-click="NuevaPartida()">Entendido.</button>
 		</div>
     </div>
 
