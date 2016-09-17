@@ -25,7 +25,9 @@ angular.module('starter.controllers', [])
   $scope.eligio = false;
 
 
-  try{
+
+   $ionicPlatform.ready(function(){
+    try{
 
       $cordovaNativeAudio
       .preloadSimple('correcto', 'mp3/correcto.mp3')
@@ -50,6 +52,9 @@ angular.module('starter.controllers', [])
     } catch(ex){
       console.log(ex.message);
     }
+
+   });
+  
 
   $scope.Respuesta=function(rta){
       $scope.eligio = true;
