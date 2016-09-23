@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', function($scope, $timeout, $state, $ionicPlatform, $cordovaNativeAudio, $cordovaVibration) {
+.controller('DashCtrl', function($scope, $timeout, $state, $ionicPlatform, $cordovaNativeAudio, $cordovaVibration, $cordovaFile) {
   $scope.usuario = {};
   $scope.usuario.respuestas = {};
   $scope.usuario.preguntas = {};
@@ -89,7 +89,6 @@ angular.module('starter.controllers', [])
       $scope.usuario.preguntas.uno.opcion.d = $scope.respuestas.cuatro;
       console.log($scope.usuario.respuestas.uno);
 
-      $ionicPlatform.ready(function() {
         if ($scope.usuario.respuestas.uno == $scope.usuario.correctas.uno){
 
           try{
@@ -121,7 +120,6 @@ angular.module('starter.controllers', [])
             }
 
         }
-      });
     }
 
     if($scope.instancia == 2){
@@ -154,7 +152,6 @@ angular.module('starter.controllers', [])
       $scope.usuario.preguntas.dos.opcion.d = $scope.respuestas.cuatro;
       console.log($scope.usuario.respuestas.dos);
 
-      $ionicPlatform.ready(function() {
         if ($scope.usuario.respuestas.dos == $scope.usuario.correctas.dos){
 
           try{
@@ -186,7 +183,6 @@ angular.module('starter.controllers', [])
             }
 
         }
-      });
     }
 
     if($scope.instancia == 3){
@@ -219,7 +215,6 @@ angular.module('starter.controllers', [])
       $scope.usuario.preguntas.tres.opcion.d = $scope.respuestas.cuatro;
       console.log($scope.usuario.respuestas.tres);
 
-      $ionicPlatform.ready(function() {
         if ($scope.usuario.respuestas.tres == $scope.usuario.correctas.tres){
 
           try{
@@ -251,7 +246,6 @@ angular.module('starter.controllers', [])
             }
 
         }
-      });
     }
       
 
@@ -305,9 +299,40 @@ angular.module('starter.controllers', [])
 
       $scope.finPartida = true;
 
-      $scope.correctasJuego = $scope.usuario.correctas.uno + " - " + $scope.usuario.correctas.dos + " - " + $scope.usuario.correctas.tres;
+      $scope.correctasJuego = $scope.usuario.correctas.uno + "  -  " + $scope.usuario.correctas.dos + "  -  " + $scope.usuario.correctas.tres;
 
-      $scope.respUsuario = $scope.usuario.respuestas.uno + " - " + $scope.usuario.respuestas.dos + " - " + $scope.usuario.respuestas.tres;
+      $scope.respUsuario = $scope.usuario.respuestas.uno + "  -  " + $scope.usuario.respuestas.dos + "  -  " + $scope.usuario.respuestas.tres;
+
+      $ionicPlatform.ready(function(){
+
+        try{
+
+          var arrayRta = $scope.respUsuario.split("  -  ");
+          var archivoJson = {
+            rtas: arrayRta
+          };
+
+          $cordovaFile.createFile(cordova.file.externalDataDirectory, "rtasUsuario.txt", true)
+              .then(function (success) {
+
+              }, function (error) {
+
+              });
+
+
+            $cordovaFile.writeFile(cordova.file.externalDataDirectory, "rtasUsuario.txt", archivoJson, true)
+              .then(function (success) {
+
+              }, function (error) {
+
+              });
+
+        } catch(ex){
+          console.log(ex.message);
+        }
+
+      });
+
 
       }
     }, 3000)
@@ -357,6 +382,49 @@ angular.module('starter.controllers', [])
   //
   //$scope.$on('$ionicView.enter', function(e) {
   //});
+})
+
+.controller('LecturaCtrl', function($scope, $ionicPlatform, $cordovaFile){
+
+  $ionicPlatform.ready(function(){
+
+     $scope.$on('$ionicView.enter', function(e) {
+      $scope.contenido = "";
+
+      try{
+      $cordovaFile.checkFile(cordova.file.externalDataDirectory, "rtasUsuario.txt")
+      .then(function (success) {
+        
+        $cordovaFile.readAsText(cordova.file.externalDataDirectory, "rtasUsuario.txt")
+          .then(function (exito) {
+            /*var cadenaExito = JSON.stringify(exito);
+            alert(cadenaExito);*/
+            var objJson = JSON.parse(exito);
+            for(var i = 0; i < objJson.rtas.length; i++){
+              $scope.contenido += objJson.rtas[i] + "  ";
+            };
+            //$scope.contenido = JSON.stringify(objJson.rtas);
+
+          }, function (error) {
+            $scope.contenido = "El archivo solocitado no se pudo leer";
+            var cadenaError = JSON.stringify(error);
+            console.log(cadenaError);
+          });
+
+      }, function (error) {
+        $scope.contenido = "El archivo solocitado no existe";
+        var cadenaError = JSON.stringify(error);
+        console.log(cadenaError);
+      });
+
+    } catch(ex){
+      console.log(ex);
+    }
+
+    });    
+
+  });
+
 })
 
 

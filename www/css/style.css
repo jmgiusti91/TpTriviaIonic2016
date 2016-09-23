@@ -182,3 +182,26 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d6f9ff', end
   }  
 
 }
+
+
+/* Estilos Lectura */
+
+
+.oscuro  {
+  background: #444;
+  padding: 60px;
+  }
+   
+#esquina  {
+ background: #fff url(../img/imagen3.jpg) bottom right no-repeat;
+}
+ 
+#esquina p  {
+  padding: 50px;
+  margin: 0;
+  height: 500px;
+}
+
+#esquina  {
+ background: #fff url(../img/imagen3.jpg) bottom right no-repeat;
+ }
